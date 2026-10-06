@@ -217,6 +217,8 @@ with sync_playwright() as p:
     pg.wait_for_function('window.__ready === true || !!window.__bootFailed', timeout=180000)
     bf = pg.evaluate('window.__bootFailed || null')
     if bf: raise SystemExit('❌ 场景加载失败：\n' + bf)
+    if not spec:                                            # 整片的画幅读画布（竖屏片在段落表里 U.setStage(1080, 1920)）
+        VW, VH = pg.evaluate('[window.__canvas.width, window.__canvas.height]')
     segs = [{'id': Path(a.spec).resolve().parent.name, 't0': 0, 't1': spec['duration'], 'tr': 0}] if spec else \
         pg.evaluate('ERAS.map(e => ({id: e.id, t0: e.t0, t1: Math.min(e.t1, window.__total), tr: e.transition ? e.transition.dur + (e.transition.delay || 0) : 0}))')
     want = set(a.ids.split(',')) if a.ids else None

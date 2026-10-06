@@ -46,7 +46,7 @@ description: "艺术与视频动画：拆解复刻动画；代码画35种艺术�
 
 ## 工程
 
-`scripts/engine/` 是可复制的完整工程（引擎、转场库、绘画库、角色骨架、35 个风格场景、渲染器；YouTube 解说语法的 8 个库、8 支示范 `demos/`、参数化片段 `clip.html`＋`clips/`，见 09；长卷穿越片示范 `demos/long_scroll/`，见 11；口播整片参考代码`reference_films/spacex/`需自备角色和音频，见目录README）。开新片：复制到项目的 `代码工程/`，改 `eras.js` 段落表，写 `scenes/<id>.js`。
+`scripts/engine/` 是可复制的完整工程（引擎、转场库、绘画库、角色骨架、35 个风格场景、渲染器；YouTube 解说语法的 8 个库、8 支示范 `demos/`、参数化片段 `clip.html`＋`clips/`，见 09；长卷穿越片示范 `demos/long_scroll/`，见 11；口播整片参考代码`reference_films/spacex/`需自备角色和音频，见目录README；竖屏口播成片`films/why_time_flies/`从文案、TTS口播、逐字对时、配乐到画面全链路可重渲，竖屏整片在段落表里写`U.setStage(1080, 1920)`）。开新片：复制到项目的 `代码工程/`，改 `eras.js` 段落表，写 `scenes/<id>.js`。
 
 ```sh
 E=<项目>/代码工程
