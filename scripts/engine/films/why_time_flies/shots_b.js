@@ -29,7 +29,9 @@ SCENES.s05 = { draw: (c, lt, t) => {
   CAM.with(c, cam, g => {
     const ap = E.back(MO.seg(t, tPie + 0.3, tPie + 0.9), 1.3), R = PIE.R * lerp(1, 0.85, morph), cx = PIE.x, cy = lerp(PIE.y, 700, morph);
     if (ap <= 0) return;
-    g.save(); g.translate(cx, cy); g.scale(ap, ap); g.rotate(morph * (t - tMore) * 2.2);
+    // 待机：饼轻轻呼吸、缓慢摆动（画面不停），变成胶片盘后转起来
+    const br = 1 + 0.012 * Math.sin(t * 2.4);
+    g.save(); g.translate(cx, cy + Math.sin(t * 1.3) * 6); g.scale(ap * br, ap * br); g.rotate(Math.sin(t * 0.7) * 0.04 + morph * (t - tMore) * 2.2);
     glow(g, 0, 0, R * 1.5, lerp(0, 1, morph) > 0.5 ? C.warm : C.cyan, 0.16);
     // 饼身：青色→胶片深色
     const body = TOON.circle(0, 0, R);

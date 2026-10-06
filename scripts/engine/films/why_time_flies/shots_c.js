@@ -13,6 +13,9 @@ const dayBase = () => F.sprite('daybase', 640, 400, (g, w, h) => {
   g.fillStyle = '#4a466e'; g.fill(F.rr(30, 112, w - 60, h - 142, 22));
 });
 
+// 摞起来的卡：7 档亮度的底板（brightness 0.75–1.0），缓存
+const shadeSprite = k => F.sprite('dayshade:' + k, 640, 400, g => { g.filter = `brightness(${0.75 + 0.25 * k / 6})`; g.drawImage(dayBase(), 0, 0); });
+
 // ---------------------------------------------------------------- 镜 9：长大以后 → 合并成一帧 → 回头看只剩一张
 // 灰色。一天＝起床、通勤、上班、刷手机；这一天翻倒成俯视，一张张一模一样的卡往上摞到 365 张；
 // 「合并成」先往上一提（预备），「一帧」那个字：0.12s 拍扁成一张——闪白、震屏、尘土、×1 盖章。全片的记忆点。
@@ -53,7 +56,7 @@ SCENES.s09 = { draw: (c, lt, t) => {
       c.save(); c.translate(CARD.x, y); c.scale(1, sy);
       if (top || count === 1) {
         c.drawImage(tilt > 0.02 || t > ICONT[3] + 0.3 ? full : sp, -CARD.w / 2, -ch / 2, CARD.w, ch);
-      } else { c.globalAlpha *= 1; c.filter = `brightness(${shade})`; c.drawImage(sp, -CARD.w / 2, -ch / 2, CARD.w, ch); }
+      } else c.drawImage(shadeSprite(Math.round((shade - 0.75) / 0.25 * 6)), -CARD.w / 2, -ch / 2, CARD.w, ch);   // 预先压暗的 7 档底板（逐张 filter 太慢）
       c.restore();
     }
     // 正面时四件事逐个弹出（之后用带图标的整卡）
